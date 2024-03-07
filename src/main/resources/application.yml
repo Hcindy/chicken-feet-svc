@@ -1,0 +1,20 @@
+server:
+#  port: 80
+  port: 50001
+spring:
+  pid:
+    file: "app.pid"
+  redis:
+    database: 1
+    host: 192.168.0.10
+    port: 30001
+    password: ESP496z8
+    timeout: 10000
+  main:
+    banner-mode: off
+logging:
+  file:
+    name: "app.log"
+  logback:
+    rollingpolicy:
+      max-file-size: 64MB

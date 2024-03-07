@@ -1,0 +1,29 @@
+= Chicken Feet Svc
+
+画鸡脚后端
+
+== 底层依赖
+
+* jdk 8
+* gradle 7.0.2
+* spring boot 2.6.0
+
+== 准备
+
+. git clone 到工作目录，如该目录是Linux上经Samba映射的一个目录
+. docker pull gradle:7.0.2-jdk8-openj9
+. 执行 docker run -it --rm -p 50001:50001 -w /root/chicken-feet-svc -v /root/hcindy/hostpath/samba/chicken-feet-svc:/root/chicken-feet-svc -v /root/hcindy/hostpath/samba/.gradle:/home/gradle/.gradle gradle:7.0.2-jdk8-openj9 bash
+. 执行 gradle --refresh-dependencies
+. 执行 gradle :bootRun
+. 执行 gradle :build
+. docker run -it --rm redis:5.0.9-alpine redis-cli -h 192.168.0.10 -p 30001 -a ESP496z8 -n 1
+. FLUSHDB——清除当前库
+. FLUSHALL——清除所有库
+. HGETALL key
+
+db---| endtime > now()
+     -> newgame
+           | endtime - now() > 30min ? 30min : endtime
+cache<------
+
+加入游戏了的，直接进入waiting
